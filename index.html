@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sip Of Soul | A Cup Of Soul + Neo Soul Coffee Delivery</title>
+  <meta name="description" content="A responsive static coffee café website with an AI-style coffee facts bot." />
+  <style>
+    :root {
+      --espresso: #23140f;
+      --coffee: #4b2e22;
+      -- latte: #d9b99b;
+      --cream: #fff7ec;
+      --foam: #f6eadb;
+      --caramel: #c47a3a;
+      --green: #3d5a40;
+      --shadow: 0 20px 50px rgba(35, 20, 15, 0.18);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--cream);
+      color: var(--espresso);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+
+    .ticker {
+      background: var(--espresso);
+      color: var(--foam);
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.65rem 0;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 24s linear infinite;
+    }
+
+    @keyframes ticker {
+      to { transform: translateX(-100%); }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 247, 236, 0.85);
+      border-bottom: 1px solid rgba(75, 46, 34, 0.1);
+    }
+
+    nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.15rem;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 35%, #fff 0 14%, transparent 15%),
+        linear-gradient(135deg, var(--caramel), var(--coffee));
+      box-shadow: 0 8px 22px rgba(196, 122, 58, 0.35);
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 2px solid rgba(255,255,255,0.65);
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      opacity: 0.78;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--caramel); }
+
+    .nav-cta, .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.85rem 1.2rem;
+      background: var(--espresso);
+      color: var(--cream);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(35,20,15,0.22);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .nav-cta:hover, .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(35,20,15,0.28);
+      background: var(--coffee);
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      padding: 5rem 1.25rem;
+      background:
+        linear-gradient(135deg, rgba(35,20,15,0.78), rgba(75,46,34,0.45)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=80") center/cover;
+      color: var(--cream);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12), transparent 24%),
+        radial-gradient(circle at 80% 70%, rgba(196,122,58,0.22), transparent 32%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 9vw, 7.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero p {
+      max-width: 710px;
+      margin: 0 auto 2rem;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,247,236,0.88);
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(8px);
+    }
+
+    section {
+      max-width: 1180px;
+      margin: auto;
+      padding: 5rem 1.25rem;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      max-width: 680px;
+    }
+
+    .section-heading p {
+      max-width: 430px;
+      color: rgba(35,20,15,0.7);
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(75,46,34,0.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 30px 70px rgba(35,20,15,0.2);
+    }
+
+    .card-img {
+      min-height: 220px;
+      background: linear-gradient(135deg, var(--latte), var(--caramel));
+      display: grid;
+      place-items: center;
+      color: rgba(35,20,15,0.55);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img.photo-1 { background: url("https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80") center/cover; }
+    .card-img.photo-2 { background: url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80") center/cover; }
+    .card-img.photo-3 { background: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80") center/cover; }
+
+    .card-body { padding: 1.4rem; }
+    .card-body h3 { font-size: 1.35rem; margin-bottom: 0.5rem; letter-spacing: -0.03em; }
+    .card-body p { color: rgba(35,20,15,0.72); }
+    .price {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: 900;
+      color: var(--caramel);
+      font-size: 1.2rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      min-height: 520px;
+      border-radius: calc(var(--radius) * 1.4);
+      background:
+        linear-gradient(rgba(35,20,15,0.2), rgba(35,20,15,0.2)),
+        url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80") center/cover;
+      box-shadow: var(--shadow);
+    }
+
+    .about-panel {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: clamp(1.5rem, 4vw, 3rem);
+      border-radius: calc(var(--radius) * 1.4);
+      box-shadow: var(--shadow);
+    }
+
+    .about-panel h2 {
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin-bottom: 1rem;
+    }
+
+    .about-panel p {
+      color: rgba(255,247,236,0.82);
+      margin-bottom: 1.1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-top: 1.4rem;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .stat strong { display: block; font-size: 1.6rem; color: var(--latte); }
+
+    .menu-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(75,46,34,0.1);
+    }
+
+    .menu-item h3 { letter-spacing: -0.03em; }
+    .menu-item p { color: rgba(35,20,15,0.66); font-size: 0.92rem; }
+    .menu-item strong { color: var(--caramel); white-space: nowrap; }
+
+
+
+    .music-player {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .music-card {
+      background:
+        linear-gradient(135deg, rgba(35,20,15,0.88), rgba(75,46,34,0.88)),
+        url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80") center/cover;
+      color: var(--cream);
+      border-radius: calc(var(--radius) * 1.2);
+      box-shadow: var(--shadow);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+    }
+
+    .music-card h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin-bottom: 1rem;
+    }
+
+    .music-card p {
+      color: rgba(255,247,236,0.82);
+      max-width: 520px;
+    }
+
+    .player-box {
+      background: #fff;
+      border: 1px solid rgba(75,46,34,0.12);
+      border-radius: calc(var(--radius) * 1.2);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 3vw, 1.5rem);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .now-playing {
+      background: var(--foam);
+      border-radius: 22px;
+      padding: 1rem;
+      border: 1px solid rgba(75,46,34,0.1);
+    }
+
+    .now-playing small {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+      color: var(--caramel);
+      margin-bottom: 0.35rem;
+    }
+
+    .now-playing strong {
+      display: block;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .audio-player {
+      width: 100%;
+      accent-color: var(--caramel);
+    }
+
+    .track-list {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .track-btn {
+      width: 100%;
+      border: 1px solid rgba(75,46,34,0.12);
+      background: var(--cream);
+      border-radius: 18px;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .track-btn:hover,
+    .track-btn.active {
+      transform: translateY(-2px);
+      background: var(--foam);
+      border-color: rgba(196,122,58,0.45);
+    }
+
+    .track-btn span {
+      display: block;
+      color: rgba(35,20,15,0.66);
+      font-size: 0.86rem;
+      margin-top: 0.2rem;
+    }
+
+    .track-badge {
+      background: var(--espresso);
+      color: var(--cream);
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.75rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 1rem;
+    }
+
+    .gallery-card {
+      min-height: 260px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      background: var(--coffee);
+    }
+
+    .gallery-card.large {
+      grid-row: span 2;
+      min-height: 540px;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-card span {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      background: rgba(35, 20, 15, 0.72);
+      color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 0.75rem 0.9rem;
+      font-weight: 800;
+    }
+
+    .bot-section {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .bot-intro {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-radius: calc(var(--radius) * 1.2);
+      background: linear-gradient(135deg, var(--coffee), var(--espresso));
+      color: var(--cream);
+      box-shadow: var(--shadow);
+    }
+
+    .bot-intro h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin-bottom: 1rem;
+    }
+
+    .bot-intro p { color: rgba(255,247,236,0.82); }
+
+    .chatbot {
+      border-radius: calc(var(--radius) * 1.2);
+      background: #fff;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(75,46,34,0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 520px;
+    }
+
+    .chat-header {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      color: rgba(255,247,236,0.76);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #73e08a;
+      box-shadow: 0 0 0 6px rgba(115,224,138,0.13);
+    }
+
+    .messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(196,122,58,0.09), transparent 24%),
+        #fffaf3;
+    }
+
+    .message {
+      max-width: 82%;
+      padding: 0.85rem 1rem;
+      border-radius: 18px;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 8px 18px rgba(35,20,15,0.08);
+      animation: pop 0.25s ease both;
+    }
+
+    @keyframes pop {
+      from { transform: translateY(8px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .bot-msg {
+      background: #fff;
+      border: 1px solid rgba(75,46,34,0.1);
+    }
+
+    .user-msg {
+      margin-left: auto;
+      background: var(--espresso);
+      color: var(--cream);
+    }
+
+    .quick-prompts {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      padding: 0.75rem 1rem 0;
+      background: #fffaf3;
+    }
+
+    .chip {
+      border: 1px solid rgba(75,46,34,0.18);
+      background: #fff;
+      color: var(--coffee);
+      border-radius: 999px;
+      padding: 0.5rem 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.25s ease;
+      font-size: 0.83rem;
+    }
+
+    .chip:hover {
+      background: var(--foam);
+      transform: translateY(-2px);
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 0.7rem;
+      padding: 1rem;
+      border-top: 1px solid rgba(75,46,34,0.12);
+      background: #fff;
+    }
+
+    .chat-input input {
+      flex: 1;
+      border: 1px solid rgba(75,46,34,0.18);
+      border-radius: 999px;
+      padding: 0.85rem 1rem;
+      outline: 0;
+      background: var(--cream);
+    }
+
+    .chat-input input:focus {
+      border-color: var(--caramel);
+      box-shadow: 0 0 0 4px rgba(196,122,58,0.14);
+    }
+
+    .contact {
+      background: var(--foam);
+      max-width: none;
+      padding-left: max(1.25rem, calc((100vw - 1180px) / 2));
+      padding-right: max(1.25rem, calc((100vw - 1180px) / 2));
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    form {
+      background: #fff;
+      border: 1px solid rgba(75,46,34,0.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      border: 1px solid rgba(75,46,34,0.16);
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      background: var(--cream);
+      outline: none;
+    }
+
+    form textarea { min-height: 130px; resize: vertical; }
+
+    footer {
+      background: var(--espresso);
+      color: rgba(255,247,236,0.78);
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    .mobile-toggle { display: none; }
+
+    @media (max-width: 880px) {
+      .mobile-toggle {
+        display: inline-flex;
+        border: 0;
+        background: var(--espresso);
+        color: var(--cream);
+        border-radius: 12px;
+        padding: 0.55rem 0.75rem;
+        font-weight: 900;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 74px;
+        left: 1rem;
+        right: 1rem;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(255,247,236,0.98);
+        border: 1px solid rgba(75,46,34,0.12);
+        box-shadow: var(--shadow);
+        border-radius: 20px;
+        padding: 1rem;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-cta { text-align: center; }
+
+      .section-heading,
+      .about,
+      .music-player,
+      .bot-section,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .section-heading { align-items: start; }
+      .grid-3, .menu-list, .gallery-grid { grid-template-columns: 1fr; }
+      .about-visual { min-height: 360px; }
+      .gallery-card.large { min-height: 360px; }
+      .gallery-card { min-height: 280px; }
+      .stats { grid-template-columns: 1fr; }
+      .hero { min-height: 78vh; }
+      .message { max-width: 94%; }
+      .chat-input { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ticker">
+    <div class="ticker-track">Sip Of Soul mobile café • Order-only delivery • A Cup Of Soul signature coffee • Soul + neo soul listening lounge • BeanBro AI online •</div>
+  </div>
+
+  <header>
+    <nav>
+      <a class="logo" href="#home" aria-label="Sip Of Soul home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Sip Of Soul</span>
+      </a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#specials">Signature</a>
+        <a href="#menu">Order</a>
+        <a href="#music">Soul Player</a>
+        <a href="#coffee-ai">BeanBro AI</a>
+        <a href="#contact" class="nav-cta">Order Delivery</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">☕ Coffee x Culture x Smart Facts</div>
+        <h1>Where every cup has a story.</h1>
+        <p>
+          A mobile coffee café built around one unforgettable signature drink: A Cup Of Soul,
+          delivered fresh with a warm soundtrack of soul and neo soul energy.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn">Order The Signature Coffee</a>
+          <a href="#coffee-ai" class="btn secondary">Ask BeanBro AI</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="about-visual" aria-label="Coffee shop interior image"></div>
+      <div class="about-panel">
+        <h2>Crafted for slow mornings and focused afternoons.</h2>
+        <p>
+          Sip Of Soul is a mobile coffee café built around one special coffee experience instead of a crowded menu.
+          Our house feature, A Cup Of Soul, is designed by a celebrated barista, made to order,
+          and delivered fresh with a precise method that highlights aroma, body, sweetness, and finish.
+        </p>
+        <p>
+          BeanBro AI adds a fun educational layer by sharing brewing tips, roast facts,
+          flavor notes, and delivery-friendly recommendations.
+        </p>
+        <div class="stats">
+          <div class="stat"><strong>1</strong><span>signature coffee</span></div>
+          <div class="stat"><strong>Order</strong><span>delivery only</span></div>
+          <div class="stat"><strong>BeanBro</strong><span>AI coffee guide</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="specials">
+      <div class="section-heading">
+        <h2>One coffee. One experience.</h2>
+        <p>The café is centered around a single signature drink made to feel premium, memorable, and intentional.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-img photo-1"></div>
+          <div class="card-body">
+            <h3>A Cup Of Soul</h3>
+            <p>The café’s only signature coffee: a refined espresso-based drink with layered sweetness, soft cream texture, and a smooth roasted finish.</p>
+            <span class="price">$8.50</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img photo-2"></div>
+          <div class="card-body">
+            <h3>Created By A Master Barista</h3>
+            <p>Designed as a showcase drink by a well-known barista, this recipe focuses on balance, aroma, mouthfeel, and a memorable final note.</p>
+            <span class="price">Signature Recipe</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img photo-3"></div>
+          <div class="card-body">
+            <h3>Served With A Story</h3>
+            <p>Each cup includes tasting notes and a short coffee insight, turning the drink into both a café order and a learning experience.</p>
+            <span class="price">Limited Daily Batch</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="section-heading">
+        <h2>Order-only delivery.</h2>
+        <p>A streamlined mobile café menu built around one premium coffee, delivered fresh without a physical storefront.</p>
+      </div>
+
+      <div class="menu-list">
+        <div class="menu-item">
+          <div><h3>A Cup Of Soul</h3><p>Signature espresso, steamed milk, house cream finish, caramel-cocoa aroma, and a smooth balanced body. Delivered fresh.</p></div>
+          <strong>$8.50</strong>
+        </div>
+        <div class="menu-item">
+          <div><h3>Iced Barista Reserve</h3><p>The same signature recipe served chilled over ice with a lighter, refreshing finish for delivery orders.</p></div>
+          <strong>$8.75</strong>
+        </div>
+        <div class="menu-item">
+          <div><h3>Reserve Tasting Card</h3><p>A printed tasting note card explaining the flavor profile, origin inspiration, and barista method.</p></div>
+          <strong>Included</strong>
+        </div>
+        <div class="menu-item">
+          <div><h3>Fresh Pastry Pairing</h3><p>A rotating bakery pairing chosen to complement the signature coffee’s sweetness and roast notes.</p></div>
+          <strong>$4.50</strong>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section id="music">
+      <div class="music-player">
+        <div class="music-card">
+          <div class="eyebrow">Soul Soundtrack</div>
+          <h2>Sip, vibe, repeat.</h2>
+          <p>
+            Sip Of Soul pairs A Cup Of Soul with a smooth listening experience.
+            Use this built-in player for soul and neo soul tracks while customers browse, order, or learn from BeanBro AI.
+          </p>
+        </div>
+
+        <div class="player-box">
+          <div class="now-playing">
+            <small>Now Playing</small>
+            <strong id="trackTitle">Soulful Morning Loop</strong>
+            <span id="trackArtist">Sip Of Soul Radio</span>
+          </div>
+
+          <audio id="soulAudio" class="audio-player" controls preload="metadata">
+            <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_9462f0a0e1.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+
+          <div class="track-list" aria-label="Soul and neo soul playlist">
+            <button class="track-btn active" data-title="Soulful Morning Loop" data-artist="Sip Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_9462f0a0e1.mp3?filename=lofi-study-112191.mp3">
+              <div><strong>Soulful Morning Loop</strong><span>Warm keys, soft drums, café morning energy</span></div>
+              <div class="track-badge">Soul</div>
+            </button>
+
+            <button class="track-btn" data-title="Neo Soul Coffee Break" data-artist="Sip Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2023/04/17/audio_6f54915fbb.mp3?filename=good-night-160166.mp3">
+              <div><strong>Neo Soul Coffee Break</strong><span>Relaxed groove for sipping and browsing</span></div>
+              <div class="track-badge">Neo Soul</div>
+            </button>
+
+            <button class="track-btn" data-title="Late Night Latte Mood" data-artist="Sip Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3?filename=lofi-chill-medium-version-159456.mp3">
+              <div><strong>Late Night Latte Mood</strong><span>Chill instrumental vibe for evening orders</span></div>
+              <div class="track-badge">Chill</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-heading">
+        <h2>Real people. Real coffee reactions.</h2>
+        <p>Customer-style testimonials with people smiling, sipping, and enjoying A Cup Of Soul.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card large">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Smiling woman holding a coffee cup" />
+          <span>“The smoothest coffee delivery experience I’ve had.”</span>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=80" alt="Man sipping coffee and smiling" />
+          <span>“BeanBro AI helped me choose the perfect order.”</span>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Woman enjoying a coffee drink" />
+          <span>“You can taste the quality in every sip.”</span>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Happy customer with coffee" />
+          <span>“This feels like a luxury café delivered to me.”</span>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80" alt="Person smiling while drinking coffee" />
+          <span>“A Cup Of Soul is officially my favorite coffee.”</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="coffee-ai" class="bot-section">
+      <div class="bot-intro">
+        <h2>Meet BeanBro AI.</h2>
+        <p>
+          BeanBro AI answers coffee questions, explains the signature drink, and helps customers understand the delivery-only café experience.
+          It does not require a backend, API key, or database. You can later connect it to a real AI model.
+        </p>
+      </div>
+
+      <div class="chatbot" aria-label="Coffee AI chatbot">
+        <div class="chat-header">
+          <div>
+            <strong>BeanBro AI</strong>
+            <div class="status"><span class="dot"></span>Coffee facts + delivery guide online</div>
+          </div>
+          <span>☕</span>
+        </div>
+
+        <div class="quick-prompts">
+          <button class="chip" data-question="What is the difference between latte and cappuccino?">Latte vs Cappuccino</button>
+          <button class="chip" data-question="Give me a coffee fact">Coffee Fact</button>
+          <button class="chip" data-question="How should I brew better coffee at home?">Brew Tips</button>
+          <button class="chip" data-question="Tell me about the signature coffee">Signature Coffee</button>
+        </div>
+
+        <div class="messages" id="messages">
+          <div class="message bot-msg">
+            Welcome to BeanBro AI for Sip Of Soul. Ask me about A Cup Of Soul, delivery orders, coffee facts, brewing tips, roast levels, or what makes a signature coffee special.
+          </div>
+        </div>
+
+        <form class="chat-input" id="chatForm">
+          <input id="userInput" type="text" placeholder="Ask a coffee question..." autocomplete="off" />
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact-wrap">
+        <div class="section-heading" style="display:block;margin-bottom:0;">
+          <h2>Order delivery.</h2>
+          <p style="margin-top:1rem;">
+            This mobile café is order-only and built for delivery. Add your delivery zones, hours, social links, and online ordering details here.
+          </p>
+          <p style="margin-top:1rem;"><strong>Delivery Hours:</strong> Mon–Sat 7AM–7PM • Sun 8AM–4PM</p>
+          <p><strong>Service:</strong> Mobile coffee delivery only</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Thanks! Replace this with Formspree, Netlify Forms, or your backend email handler.');">
+          <input type="text" placeholder="Full name" required />
+          <input type="email" placeholder="Email address" required />
+          <textarea placeholder="Delivery notes, event request, or catering question"></textarea>
+          <button class="btn" type="submit">Request Delivery</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Sip Of Soul. Mobile order-only coffee delivery powered by BeanBro AI.</p>
+  </footer>
+
+  <script>
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    mobileToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const messages = document.getElementById("messages");
+    const chatForm = document.getElementById("chatForm");
+    const userInput = document.getElementById("userInput");
+
+    const facts = [
+      "Coffee beans are actually seeds from the fruit of the coffee plant, often called coffee cherries.",
+      "Light roast coffee usually has more noticeable acidity and origin flavor, while dark roast tastes smokier and bolder.",
+      "Arabica coffee is known for sweeter, more complex flavors, while Robusta has more caffeine and a stronger body.",
+      "Espresso is not a type of bean. It is a brewing method using pressure to extract concentrated coffee.",
+      "Blooming coffee means adding a small amount of hot water first so trapped gases can escape before brewing."
+    ];
+
+    function addMessage(text, type) {
+      const message = document.createElement("div");
+      message.className = `message ${type === "user" ? "user-msg" : "bot-msg"}`;
+      message.textContent = text;
+      messages.appendChild(message);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function getBotReply(question) {
+      const q = question.toLowerCase();
+
+      if (q.includes("latte") && q.includes("cappuccino")) {
+        return "A latte has more steamed milk and a lighter foam layer. A cappuccino is usually equal parts espresso, steamed milk, and foam, giving it a stronger coffee taste.";
+      }
+
+      if (q.includes("fact")) {
+        return facts[Math.floor(Math.random() * facts.length)];
+      }
+
+      if (q.includes("brew") || q.includes("home") || q.includes("better")) {
+        return "For better home coffee, use fresh beans, grind right before brewing, measure your coffee-to-water ratio, use filtered water, and keep your equipment clean. A good starting ratio is 1 gram of coffee to 16 grams of water.";
+      }
+
+      if (q.includes("delivery") || q.includes("mobile") || q.includes("where") || q.includes("storefront")) {
+        return "Sip Of Soul is mobile and order-only, meaning there is no traditional storefront. Customers place delivery orders for the signature A Cup Of Soul coffee.";
+      }
+
+      if (q.includes("signature") || q.includes("reserve") || q.includes("special") || q.includes("order") || q.includes("recommend")) {
+        return "Our signature coffee is A Cup Of Soul. It is a premium espresso-based drink designed by a well-known barista with a smooth body, layered sweetness, soft cream texture, and a refined roasted finish. It is made for delivery only and pairs perfectly with the soul player.";
+      }
+
+      if (q.includes("espresso")) {
+        return "Espresso is a concentrated coffee made by forcing hot water through finely ground coffee under pressure. It is the base for lattes, cappuccinos, americanos, mochas, and more.";
+      }
+
+      if (q.includes("roast")) {
+        return "Light roasts often taste brighter and more floral or fruity. Medium roasts are balanced. Dark roasts are richer, heavier, and more chocolatey or smoky.";
+      }
+
+      if (q.includes("caffeine")) {
+        return "Caffeine depends on bean type, serving size, and brew method. A cup of drip coffee often has more total caffeine than one espresso shot because the serving is larger.";
+      }
+
+      return "Great coffee question. I can help with A Cup Of Soul, delivery details, espresso basics, roast levels, brewing tips, caffeine, and fun coffee facts. Try asking: Is the café delivery only?";
+    }
+
+    chatForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const question = userInput.value.trim();
+      if (!question) return;
+
+      addMessage(question, "user");
+      userInput.value = "";
+
+      setTimeout(() => {
+        addMessage(getBotReply(question), "bot");
+      }, 450);
+    });
+
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const question = chip.dataset.question;
+        addMessage(question, "user");
+        setTimeout(() => addMessage(getBotReply(question), "bot"), 450);
+      });
+    });
+
+
+    const soulAudio = document.getElementById("soulAudio");
+    const trackTitle = document.getElementById("trackTitle");
+    const trackArtist = document.getElementById("trackArtist");
+    const trackButtons = document.querySelectorAll(".track-btn");
+
+    trackButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        trackButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const title = button.dataset.title;
+        const artist = button.dataset.artist;
+        const src = button.dataset.src;
+
+        trackTitle.textContent = title;
+        trackArtist.textContent = artist;
+        soulAudio.src = src;
+        soulAudio.play().catch(() => {
+          console.log("Audio playback requires a user gesture.");
+        });
+      });
+    });
+
+  </script>
+</body>
+</html>
