@@ -1026,10 +1026,14 @@ Loretta P. (Harlem / NY)</strong>
           <p><strong>Service:</strong> Mobile coffee delivery only</p>
         </div>
 
-        <form onsubmit="event.preventDefault(); alert('Thanks! Replace this with Formspree, Netlify Forms, or your backend email handler.');">
-          <input type="text" placeholder="Full name" required />
-          <input type="email" placeholder="Email address" required />
-          <textarea placeholder="Delivery notes, event request, or catering question"></textarea>
+        <form action="https://formsubmit.co/odot.rva@proton.me" method="POST">
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_subject" value="New Sips Of Soul Delivery Request" />
+
+          <input type="text" name="name" placeholder="Full name" required />
+          <input type="email" name="email" placeholder="Email address" required />
+          <textarea name="message" placeholder="Delivery notes, event request, or catering question"></textarea>
           <button class="btn" type="submit">Request Delivery</button>
         </form>
       </div>
