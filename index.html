@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sip Of Soul | A Cup Of Soul + Neo Soul Coffee Delivery</title>
+  <title>Sips Of Soul | A Cup Of Soul + Neo Soul Coffee Delivery</title>
   <meta name="description" content="A responsive static coffee café website with an AI-style coffee facts bot." />
   <style>
     :root {
@@ -469,49 +469,51 @@
       white-space: nowrap;
     }
 
-    .gallery-grid {
+    .testimonial-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      grid-template-columns: repeat(5, 1fr);
       gap: 1rem;
     }
 
-    .gallery-card {
+    .testimonial-card {
       min-height: 260px;
       border-radius: var(--radius);
-      overflow: hidden;
-      position: relative;
       box-shadow: var(--shadow);
-      background: var(--coffee);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(196,122,58,0.14), transparent 35%),
+        linear-gradient(135deg, #fff, var(--foam));
+      border: 1px solid rgba(75,46,34,0.12);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .gallery-card.large {
-      grid-row: span 2;
-      min-height: 540px;
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 70px rgba(35,20,15,0.18);
     }
 
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.45s ease;
+    .testimonial-card .quote-mark {
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--caramel);
+      font-weight: 900;
     }
 
-    .gallery-card:hover img {
-      transform: scale(1.06);
+    .testimonial-card p {
+      font-size: 1.02rem;
+      color: rgba(35,20,15,0.78);
+      font-weight: 700;
+      margin: 1rem 0;
     }
 
-    .gallery-card span {
-      position: absolute;
-      left: 1rem;
-      right: 1rem;
-      bottom: 1rem;
-      background: rgba(35, 20, 15, 0.72);
-      color: var(--cream);
-      border: 1px solid rgba(255,255,255,0.18);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 0.75rem 0.9rem;
-      font-weight: 800;
+    .testimonial-card strong {
+      color: var(--coffee);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .bot-section {
@@ -740,7 +742,7 @@
       }
 
       .section-heading { align-items: start; }
-      .grid-3, .menu-list, .gallery-grid { grid-template-columns: 1fr; }
+      .grid-3, .menu-list, .testimonial-grid { grid-template-columns: 1fr; }
       .about-visual { min-height: 360px; }
       .gallery-card.large { min-height: 360px; }
       .gallery-card { min-height: 280px; }
@@ -753,14 +755,14 @@
 </head>
 <body>
   <div class="ticker">
-    <div class="ticker-track">Sip Of Soul mobile café • Order-only delivery • A Cup Of Soul signature coffee • Soul + neo soul listening lounge • BeanBro AI online •</div>
+    <div class="ticker-track">Sips Of Soul mobile café • Order-only delivery • A Cup Of Soul signature coffee • Soul + neo soul listening lounge • BeanBro AI online •</div>
   </div>
 
   <header>
     <nav>
-      <a class="logo" href="#home" aria-label="Sip Of Soul home">
+      <a class="logo" href="#home" aria-label="Sips Of Soul home">
         <span class="logo-mark" aria-hidden="true"></span>
-        <span>Sip Of Soul</span>
+        <span>Sips Of Soul</span>
       </a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation">Menu</button>
       <div class="nav-links" id="navLinks">
@@ -795,9 +797,10 @@
       <div class="about-panel">
         <h2>Crafted for slow mornings and focused afternoons.</h2>
         <p>
-          Sip Of Soul is a mobile coffee café built around one special coffee experience instead of a crowded menu.
-          Our house feature, A Cup Of Soul, is designed by a celebrated barista, made to order,
-          and delivered fresh with a precise method that highlights aroma, body, sweetness, and finish.
+          Sips Of Soul is a mobile coffee café built around one special coffee experience instead of a crowded menu.
+          The vision began with a man who believed he could help change the world from a single cup of his coffee.
+          His idea was simple: once you have A Cup Of Soul, your day brightens with a higher vibration.
+          Every order is made to bring warmth, energy, and intention into the customer’s day.
         </p>
         <p>
           BeanBro AI adds a fun educational layer by sharing brewing tips, roast facts,
@@ -881,7 +884,7 @@
           <div class="eyebrow">Soul Soundtrack</div>
           <h2>Sip, vibe, repeat.</h2>
           <p>
-            Sip Of Soul pairs A Cup Of Soul with a smooth listening experience.
+            Sips Of Soul pairs A Cup Of Soul with a smooth listening experience.
             Use this built-in player for soul and neo soul tracks while customers browse, order, or learn from BeanBro AI.
           </p>
         </div>
@@ -890,7 +893,7 @@
           <div class="now-playing">
             <small>Now Playing</small>
             <strong id="trackTitle">Soulful Morning Loop</strong>
-            <span id="trackArtist">Sip Of Soul Radio</span>
+            <span id="trackArtist">Sips Of Soul Radio</span>
           </div>
 
           <audio id="soulAudio" class="audio-player" controls preload="metadata">
@@ -899,17 +902,17 @@
           </audio>
 
           <div class="track-list" aria-label="Soul and neo soul playlist">
-            <button class="track-btn active" data-title="Soulful Morning Loop" data-artist="Sip Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_9462f0a0e1.mp3?filename=lofi-study-112191.mp3">
+            <button class="track-btn active" data-title="Soulful Morning Loop" data-artist="Sips Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_9462f0a0e1.mp3?filename=lofi-study-112191.mp3">
               <div><strong>Soulful Morning Loop</strong><span>Warm keys, soft drums, café morning energy</span></div>
               <div class="track-badge">Soul</div>
             </button>
 
-            <button class="track-btn" data-title="Neo Soul Coffee Break" data-artist="Sip Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2023/04/17/audio_6f54915fbb.mp3?filename=good-night-160166.mp3">
+            <button class="track-btn" data-title="Neo Soul Coffee Break" data-artist="Sips Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2023/04/17/audio_6f54915fbb.mp3?filename=good-night-160166.mp3">
               <div><strong>Neo Soul Coffee Break</strong><span>Relaxed groove for sipping and browsing</span></div>
               <div class="track-badge">Neo Soul</div>
             </button>
 
-            <button class="track-btn" data-title="Late Night Latte Mood" data-artist="Sip Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3?filename=lofi-chill-medium-version-159456.mp3">
+            <button class="track-btn" data-title="Late Night Latte Mood" data-artist="Sips Of Soul Radio" data-src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3?filename=lofi-chill-medium-version-159456.mp3">
               <div><strong>Late Night Latte Mood</strong><span>Chill instrumental vibe for evening orders</span></div>
               <div class="track-badge">Chill</div>
             </button>
@@ -920,34 +923,39 @@
 
     <section id="gallery">
       <div class="section-heading">
-        <h2>Real people. Real coffee reactions.</h2>
-        <p>Customer-style testimonials with people smiling, sipping, and enjoying A Cup Of Soul.</p>
+        <h2>Real words. Real energy.</h2>
+        <p>Testimonials from customers who felt the warmth, flavor, and higher vibration of A Cup Of Soul.</p>
       </div>
 
-      <div class="gallery-grid">
-        <div class="gallery-card large">
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Smiling woman holding a coffee cup" />
-          <span>“The smoothest coffee delivery experience I’ve had.”</span>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="quote-mark">“</div>
+          <p>The smoothest coffee delivery experience I’ve had. It felt personal, warm, and intentional.</p>
+          <strong>Morning Customer</strong>
         </div>
 
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=80" alt="Man sipping coffee and smiling" />
-          <span>“BeanBro AI helped me choose the perfect order.”</span>
+        <div class="testimonial-card">
+          <div class="quote-mark">“</div>
+          <p>BeanBro AI helped me choose the perfect order, and A Cup Of Soul made my whole morning better.</p>
+          <strong>First-Time Order</strong>
         </div>
 
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Woman enjoying a coffee drink" />
-          <span>“You can taste the quality in every sip.”</span>
+        <div class="testimonial-card">
+          <div class="quote-mark">“</div>
+          <p>You can taste the quality in every sip. It has a soulful flavor that feels different from regular coffee.</p>
+          <strong>Daily Sipper</strong>
         </div>
 
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Happy customer with coffee" />
-          <span>“This feels like a luxury café delivered to me.”</span>
+        <div class="testimonial-card">
+          <div class="quote-mark">“</div>
+          <p>This feels like a luxury café delivered to me. The coffee gave my day a brighter vibration.</p>
+          <strong>Delivery Customer</strong>
         </div>
 
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80" alt="Person smiling while drinking coffee" />
-          <span>“A Cup Of Soul is officially my favorite coffee.”</span>
+        <div class="testimonial-card">
+          <div class="quote-mark">“</div>
+          <p>A Cup Of Soul is officially my favorite coffee. It has meaning, flavor, and a real story behind it.</p>
+          <strong>Soul Coffee Fan</strong>
         </div>
       </div>
     </section>
@@ -979,7 +987,7 @@
 
         <div class="messages" id="messages">
           <div class="message bot-msg">
-            Welcome to BeanBro AI for Sip Of Soul. Ask me about A Cup Of Soul, delivery orders, coffee facts, brewing tips, roast levels, or what makes a signature coffee special.
+            Welcome to BeanBro AI for Sips Of Soul. Ask me about A Cup Of Soul, delivery orders, coffee facts, brewing tips, roast levels, or what makes a signature coffee special.
           </div>
         </div>
 
@@ -1012,7 +1020,7 @@
   </main>
 
   <footer>
-    <p>© 2026 Sip Of Soul. Mobile order-only coffee delivery powered by BeanBro AI.</p>
+    <p>© 2026 Sips Of Soul. Mobile order-only coffee delivery powered by BeanBro AI.</p>
   </footer>
 
   <script>
@@ -1063,7 +1071,7 @@
       }
 
       if (q.includes("delivery") || q.includes("mobile") || q.includes("where") || q.includes("storefront")) {
-        return "Sip Of Soul is mobile and order-only, meaning there is no traditional storefront. Customers place delivery orders for the signature A Cup Of Soul coffee.";
+        return "Sips Of Soul is mobile and order-only, meaning there is no traditional storefront. Customers place delivery orders for the signature A Cup Of Soul coffee.";
       }
 
       if (q.includes("signature") || q.includes("reserve") || q.includes("special") || q.includes("order") || q.includes("recommend")) {
