@@ -100,6 +100,18 @@
       border-radius: 50%;
     }
 
+    .nav-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .hero-logo {
+      width: min(420px, 85vw);
+      margin: 0 auto 1.5rem;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -293,7 +305,7 @@
       border-radius: calc(var(--radius) * 1.4);
       background:
         linear-gradient(rgba(35,20,15,0.2), rgba(35,20,15,0.2)),
-        url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80") center/cover;
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80") center/cover;
       box-shadow: var(--shadow);
     }
 
@@ -761,7 +773,7 @@
   <header>
     <nav>
       <a class="logo" href="#home" aria-label="Sips Of Soul home">
-        <span class="logo-mark" aria-hidden="true"></span>
+        <img src="sostrans.png" alt="Sips Of Soul Logo" class="nav-logo" />
         <span>Sips Of Soul</span>
       </a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation">Menu</button>
@@ -780,6 +792,8 @@
     <section class="hero">
       <div class="hero-content">
         <div class="eyebrow">☕ Coffee x Culture x Smart Facts</div>
+        <img src="sostrans.png" alt="Sips Of Soul Logo" class="hero-logo" />
+
         <h1>Where every cup has a story.</h1>
         <p>
           A mobile coffee café built around one unforgettable signature drink: A Cup Of Soul,
